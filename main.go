@@ -9,10 +9,11 @@ import (
 	"github.com/littlerivercc/go-sync/internal/svc"
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 )
 
 var configFile = flag.String("f", "etc/config.yaml", "the config file")
-var tableName = flag.String("n", "mb_opr_account", "table name")
+var tableList = flag.String("n", "mb_opr_account", "table list")
 
 func main() {
 	flag.Parse()
@@ -25,5 +26,6 @@ func main() {
 	s := node.NewServer(ctx)
 	//defer s.Stop()
 	fmt.Printf("Starting node server ...\n")
-	s.Start(context.Background())
+	tables := strings.Split(*tableList, ",")
+	s.Run(context.Background(), tables)
 }

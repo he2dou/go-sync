@@ -21,6 +21,7 @@ const MysqlHost = "SELECT %s FROM mysql('%s:%d','%s','%s', '%s', '%s') %s;"
 type PingLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
+	tables []string
 	logx.Logger
 }
 
@@ -33,13 +34,14 @@ func NewPingLogic(ctx context.Context, svcCtx *svc.ServiceContext) *PingLogic {
 	}
 }
 
-func (s *PingLogic) Run() error {
+func (s *PingLogic) Run(tables []string) error {
 
 	for k, v := range s.svcCtx.Config.Tables {
-		if v.Skip {
+		if v.Skip || !utils.Contains(tables, v.Name) {
 			fmt.Println("skip:", k, v)
 			continue
 		}
+
 		err := s.Sync(v)
 		if err != nil {
 			fmt.Println(err)

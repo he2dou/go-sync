@@ -20,8 +20,8 @@ func NewServer(svcCtx *svc.ServiceContext) *Server {
 	}
 }
 
-func (s *Server) Start(ctx context.Context) error {
+func (s *Server) Run(ctx context.Context, tables []string) error {
 	fmt.Println(s.svcCtx.Config.Tables)
 	l := logic.NewPingLogic(ctx, s.svcCtx)
-	return l.Run()
+	return l.Run(tables)
 }

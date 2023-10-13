@@ -35,7 +35,7 @@ ClickHouse:
 
 Tables:
   - Name: "mb_opr_account"
-    Skip: true
+    Skip: false
     Full: true
     Engine: "ReplacingMergeTree"
     Partition: ""  # Table create partitioning by, like toYYYYMM(created_at).
