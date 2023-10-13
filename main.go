@@ -13,7 +13,7 @@ import (
 )
 
 var configFile = flag.String("f", "etc/config.yaml", "the config file")
-var tableList = flag.String("n", "mb_opr_account", "table list")
+var tableList = flag.String("n", "", "table list")
 
 func main() {
 	flag.Parse()
@@ -25,6 +25,7 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 	s := node.NewServer(ctx)
 	//defer s.Stop()
+
 	fmt.Printf("Starting node server ...\n")
 	var tables []string
 	if *tableList != "" {
