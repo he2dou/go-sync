@@ -1,0 +1,55 @@
+#Mysql:
+#  DataSource: root:donson.123@tcp(192.168.0.170:3306)/test?charset=utf8mb4&parseTime=True&loc=Local
+#  AutoMigrate: false
+#
+#ClickHouse:
+#  DataSource: tcp://192.168.0.171:9000?username=default&password=donson.123&database=draning_ck&read_timeout=30&write_timeout=30
+
+Core:
+  InsertNum: 100000
+
+Log:
+  ServiceName: core
+  Mode: file
+  Path: logs
+  Level: debug
+  Encoding: json
+  KeepDays: 7
+
+Gorm:
+  TablePrefix: "mb_"
+  Debug: true
+  MaxLifetime: 7200
+  MaxOpenConns: 150
+  MaxIdleConns: 50
+
+MySQL:
+  Host: 192.168.0.170
+  Port: 3306
+  User: root
+  Password: donson.123
+  Database: draning
+  Parameters: "charset=utf8mb4&parseTime=True&loc=Local"
+
+ClickHouse:
+  Host: 192.168.0.171
+  Port: 9000
+  User: default
+  Password: donson.123
+  Database: draning_ck
+  ReadTimeout: 30
+  WriteTimeout: 30
+
+Tables:
+  - Name: "mb_opr_account"
+    Skip: false
+    Full: true
+    Engine: "ReplacingMergeTree"
+    Partition: ""  # Table create partitioning by, like toYYYYMM(created_at).
+    Order: "id" # , 分割
+  - Name: "mb_opr_customer"
+    Skip: false
+    Full: true
+    Engine: "ReplacingMergeTree"
+    Partition: ""  # Table create partitioning by, like toYYYYMM(created_at).
+    Order: "id" # , 分割
