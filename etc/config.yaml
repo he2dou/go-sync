@@ -42,14 +42,20 @@ ClickHouse:
 
 Tables:
   - Name: "mb_opr_account"
-    Skip: false
+    Skip: true
     Full: true
     Engine: "ReplacingMergeTree"
     Partition: ""  # Table create partitioning by, like toYYYYMM(created_at).
     Order: "id" # , 分割
+    Where: ""
+    Insert: true
+    Rename: ""
   - Name: "mb_opr_customer"
     Skip: false
     Full: true
     Engine: "ReplacingMergeTree"
     Partition: ""  # Table create partitioning by, like toYYYYMM(created_at).
     Order: "id" # , 分割
+    Where: "status=2"
+    Insert: true
+    Rename: ""

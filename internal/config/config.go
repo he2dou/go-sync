@@ -12,7 +12,7 @@ type Config struct {
 	//}
 
 	Core struct {
-		InsertNum uint64
+		InsertNum int
 	}
 
 	Gorm       Gorm
@@ -34,5 +34,8 @@ type Table struct {
 	//PartitionBy: ""  # Table create partitioning by, like toYYYYMM(created_at).
 	Partition string
 	//OrderBy: "id"
-	Order string
+	Order  string
+	Where  string
+	Insert bool
+	Rename string
 }
