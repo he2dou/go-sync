@@ -78,12 +78,6 @@ func NewDB(dbType string, c config.Config) (*gorm.DB, func(), error) {
 	sqlDB.SetMaxOpenConns(c.Gorm.MaxOpenConns)
 	sqlDB.SetConnMaxLifetime(time.Duration(c.Gorm.MaxLifetime) * time.Second)
 
-	//if c.Mysql.AutoMigrate {
-	//	db.AutoMigrate(
-	//		types.KuaishouCampaignData{},
-	//	)
-	//}
-
 	return db, cleanFunc, nil
 }
 
