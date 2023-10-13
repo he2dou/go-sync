@@ -1,10 +1,3 @@
-#Mysql:
-#  DataSource: root:donson.123@tcp(192.168.0.170:3306)/test?charset=utf8mb4&parseTime=True&loc=Local
-#  AutoMigrate: false
-#
-#ClickHouse:
-#  DataSource: tcp://192.168.0.171:9000?username=default&password=donson.123&database=draning_ck&read_timeout=30&write_timeout=30
-
 Core:
   InsertNum: 100000
 
@@ -56,6 +49,6 @@ Tables:
     Engine: "ReplacingMergeTree"
     Partition: ""  # Table create partitioning by, like toYYYYMM(created_at).
     Order: "id" # , 分割
-    Where: "status=2"
+    Where: ""
     Insert: true
     Rename: ""

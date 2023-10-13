@@ -73,7 +73,7 @@ func (s *PingLogic) Sync(v config.Table) error {
 		return err
 	}
 
-	// 同步表
+	// 交换表
 	return s.Exchange(tableName, tableNameCK, v.Rename)
 }
 
