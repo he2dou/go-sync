@@ -26,6 +26,15 @@ func main() {
 	s := node.NewServer(ctx)
 	//defer s.Stop()
 	fmt.Printf("Starting node server ...\n")
-	tables := strings.Split(*tableList, ",")
+	var tables []string
+	if *tableList != "" {
+		tl := strings.Split(*tableList, ",")
+		for _, v := range tl {
+			if len(v) > 0 {
+				tables = append(tables, v)
+			}
+		}
+	}
+
 	s.Run(context.Background(), tables)
 }

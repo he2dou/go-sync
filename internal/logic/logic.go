@@ -36,12 +36,15 @@ func NewPingLogic(ctx context.Context, svcCtx *svc.ServiceContext) *PingLogic {
 
 func (s *PingLogic) Run(tables []string) error {
 
-	for k, v := range s.svcCtx.Config.Tables {
-		if v.Skip || !utils.Contains(tables, v.Name) {
-			fmt.Println("skip:", k, v)
+	for _, v := range s.svcCtx.Config.Tables {
+		if v.Skip {
+			fmt.Println("skip", v.Name)
 			continue
 		}
-
+		if len(tables) > 0 && !utils.Contains(tables, v.Name) {
+			fmt.Println("contains", v.Name)
+			continue
+		}
 		err := s.Sync(v)
 		if err != nil {
 			fmt.Println(err)
